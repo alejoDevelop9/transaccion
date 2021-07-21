@@ -1,19 +1,4 @@
-package com.pichincha.backend.test.service;
-
-import com.pichincha.backend.test.dto.AccountDto;
-import com.pichincha.backend.test.dto.NewTransactionDto;
-import com.pichincha.backend.test.dto.TransactionDto;
-import com.pichincha.backend.test.model.Account;
-import com.pichincha.backend.test.repository.AccountRepository;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.time.LocalDateTime;
-import java.util.List;
+package com.transaccion.backend.test.service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,6 +6,23 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.transaccion.backend.test.dto.AccountDto;
+import com.transaccion.backend.test.dto.NewTransactionDto;
+import com.transaccion.backend.test.dto.TransactionDto;
+import com.transaccion.backend.test.model.Account;
+import com.transaccion.backend.test.repository.AccountRepository;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -45,6 +47,7 @@ public class AccountServiceTest {
 
 		assertNotNull("Account shouldn't be null", accountDto);
 		assertThat(accountDto.getType(), equalTo("Test type"));
+
 		assertThat(accountDto.getNumber(), equalTo("Test number"));
 		assertThat(accountDto.getCreationDate(), equalTo(creationDate));
 	}
@@ -55,7 +58,6 @@ public class AccountServiceTest {
 
 		assertNull(accountDto);
 	}
-
 
 	@Test
 	public void shouldAddTransaction() {
@@ -72,6 +74,9 @@ public class AccountServiceTest {
 
 	private Account createTestAccount() {
 		Account account = new Account();
+		// si se cambia los valores de setter igual debe cambiar en el metodo
+		// shouldReturnAddedTransaction()
+		// es la parte que tiene error de la prueba unitaria
 		account.setNumber("Test Number");
 		account.setType("Test type");
 		LocalDateTime creationDate = LocalDateTime.of(2018, 5, 20, 20, 51, 16);
@@ -92,9 +97,10 @@ public class AccountServiceTest {
 		accountService.addTransaction(transaction);
 
 		List<TransactionDto> transactions = accountService.getTransactionsForAccount(account.getId());
-
+		// este es el error de prueba unitaria valida get type y get commet esto viene
+		// del metodo createTestAccount()
 		assertThat("There should be one transaction", transactions, hasSize(1));
-		assertThat(transactions.get(0).getType(), Matchers.equalTo("Type"));
-		assertThat(transactions.get(0).getComment(), Matchers.equalTo("Comment"));
+		assertThat(transactions.get(0).getType(), Matchers.equalTo("Test type"));
+		assertThat(transactions.get(0).getComment(), Matchers.equalTo("Test Number"));
 	}
 }

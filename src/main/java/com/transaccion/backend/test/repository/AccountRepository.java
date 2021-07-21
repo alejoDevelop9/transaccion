@@ -1,7 +1,8 @@
-package com.pichincha.backend.test.repository;
+package com.transaccion.backend.test.repository;
 
-import com.pichincha.backend.test.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.transaccion.backend.test.model.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 

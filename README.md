@@ -18,7 +18,7 @@ Para ello usted debe cumplir con lo siguiente:
     - Para ello. **No puede cambiar las pruebas unitarias existentes** pero si puede llevarlas a otra clase.
 - Extra: utilizar logs.
 
-Siga las convenciones utilizadas en este proyecto y recuerde **No puede cambiar las pruebas unitarias existentes**.
+Siga las convenciones utilizadas en este proyecto.
 
 Siéntase libre de crear archivos y modificar los existentes.
 Puede agregar dependencias si lo desea, para hacerlo modifique el `pom.xml`.
